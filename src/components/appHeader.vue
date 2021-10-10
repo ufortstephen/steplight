@@ -6,13 +6,11 @@
           class="navbar navbar-expand-lg stroke px-0"
           style="box-shadow: none !important; webkit-box-shadow: 0px !important"
         >
-          <!-- <h1>
-            <a class="navbar-brand" href="index.html">
-              <span class="fa fa-cc-visa"></span> Bank Cards
-            </a>
-          </h1> -->
-          <!-- if logo is image enable this -->
-          <a class="navbar-brand" href="#index.html">
+          <a
+            class="navbar-brand"
+            href="javascript:void(0)"
+            @click="routeLinksNavigate('')"
+          >
             <img
               src="@/assets/logo.jpeg"
               alt="Your logo"
@@ -31,30 +29,46 @@
             aria-label="Toggle navigation"
           >
             <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+
             <span class="navbar-toggler-icon fa icon-close fa-times"></span>
           </button>
 
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html"
+              <li class="nav-item active" @click="routeLinksNavigate('')">
+                <a class="nav-link" href="javascript:void(0)"
                   >Home <span class="sr-only">(current)</span></a
                 >
               </li>
-              <li class="nav-item @@about__active">
-                <a class="nav-link" href="about.html"
-                  ><span>
-                    <router-link to="/about" class="text-muted"
-                      >About
-                    </router-link>
-                  </span></a
-                >
+              <li
+                class="nav-item @@about__active"
+                @click="routeLinksNavigate('about')"
+              >
+                <a class="nav-link" href="javascript:void(0)">About</a>
               </li>
-              <li class="nav-item @@services__active">
-                <a class="nav-link" href="services.html">Services</a>
+              <li
+                class="nav-item @@services__active"
+                @click="routeLinksNavigate('services')"
+              >
+                <a class="nav-link" href="javascript:void(0)">Services</a>
               </li>
-              <li class="nav-item @@contact__active">
-                <a class="nav-link" href="contact.html">Contact</a>
+              <li
+                class="nav-item @@contact__active"
+                @click="routeLinksNavigate('contact')"
+              >
+                <a class="nav-link" href="javascript:void(0)">Contact</a>
+              </li>
+              <li
+                class="nav-item @@contact__active"
+                @click="routeLinksNavigate('register')"
+              >
+                <a class="nav-link" href="javascript:void(0)">Sign Up</a>
+              </li>
+              <li
+                class="nav-item @@contact__active"
+                @click="routeLinksNavigate('login')"
+              >
+                <a class="nav-link" href="javascript:void(0)">Login</a>
               </li>
               <!--/search-right-->
               <div class="search mr-3">
@@ -78,7 +92,7 @@
               <div class="theme-switch-wrapper">
                 <label class="theme-switch" for="checkbox">
                   <input type="checkbox" id="checkbox" />
-                  <div class="mode-container">
+                  <div class="mode-container d-none d-md-block">
                     <i class="gg-sun"></i>
                     <i class="gg-moon"></i>
                   </div>
@@ -94,7 +108,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    routeLinksNavigate(routeName) {
+      this.$router.push(`/${routeName}`);
+    },
+  },
+};
 </script>
 
 <style>

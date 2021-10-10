@@ -16,7 +16,7 @@
             >Steplight Bank</a
           >
           <a class="navbar-brand brand-logo-mini" href="javascript:void(0)"
-            ><img src="@/assets/images/logo.png" alt="logo" style="width: 150%"
+            ><img src="" alt="logo"
           /></a>
         </div>
         <div
@@ -201,7 +201,7 @@
         <!-- partial -->
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
-          <ul class="nav">
+          <ul class="nav" style="position: fixed">
             <li class="nav-item" @click="navigateRoute('dashboard')">
               <a class="nav-link" href="javascript:void(0)">
                 <i class="icon-grid menu-icon"></i>
@@ -270,12 +270,8 @@
                 <span class="menu-title">New Checkbook</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="javascript:void(0)"
-                @click="navigateRoute('user_profile')"
-              >
+            <li class="nav-item" @click="navigateRoute('user_profile')">
+              <a class="nav-link" href="javascript:void(0)">
                 <i class="icon-columns menu-icon"></i>
                 <span class="menu-title">Update Profile</span>
               </a>
@@ -295,13 +291,7 @@
               <div class="col-md-12 grid-margin">
                 <div class="row">
                   <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                    <h3 class="font-weight-bold">
-                      Welcome {{ userDetails.first_name }}
-                    </h3>
-                    <h6 class="font-weight-normal mb-0">
-                      All systems are running smoothly! You have
-                      <span class="text-primary">3 unread alerts!</span>
-                    </h6>
+                    <h3 class="font-weight-bold">Transaction History</h3>
                   </div>
                   <div class="col-12 col-xl-4">
                     <div class="justify-content-end d-flex">
@@ -333,62 +323,8 @@
                 </div>
               </div>
             </div>
+
             <div class="row">
-              <div class="col-md-6 grid-margin stretch-card">
-                <div class="card tale-bg">
-                  <div class="card-people mt-auto">
-                    <img
-                      src="@/assets/images/dashboard/people.png"
-                      alt="people"
-                    />
-                    <div class="weather-info">
-                      <div class="d-flex">
-                        <div>
-                          <h2 class="mb-0 font-weight-normal">
-                            <i class="icon-sun mr-2"></i>31<sup>C</sup>
-                          </h2>
-                        </div>
-                        <div class="ml-2">
-                          <h4 class="location font-weight-normal">Bangalore</h4>
-                          <h6 class="font-weight-normal">India</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 grid-margin transparent">
-                <div class="row py-4">
-                  <div class="col-md-8">
-                    <p class="text-muted font-weight-bold">MAIN ACCOUNT</p>
-
-                    <h4 class="mb-4">Steplight Savings Account</h4>
-                    <h6 class="mb-4">{{ userDetails.account_number }}</h6>
-
-                    <div class="d-flex" style="gap: 0.5rem">
-                      <button
-                        class="btn btn-dark rounded"
-                        @click="navigateRoute('transactions')"
-                      >
-                        Make Transfer
-                      </button>
-                      <button class="btn btn-dark rounded">
-                        Link Accounts
-                      </button>
-                    </div>
-                  </div>
-                  <div class="col-md-4 my-3 my-md-0">
-                    <p class="text-muted font-weight-bold">AVAILABLE FUNDS</p>
-                    <h2>
-                      {{ userDetails.available_bal }}
-                      <span class="text-muted"> $</span>
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row my-5">
               <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -401,7 +337,6 @@
                             <th>Details</th>
                             <th>Amount</th>
                             <th>Date</th>
-                            <th>Transaction ID</th>
                             <th>Status</th>
                           </tr>
                         </thead>
@@ -416,7 +351,6 @@
                               $ {{ transaction.transaction_amount }}
                             </td>
                             <td>{{ transaction.transaction_date }}</td>
-                            <td>{{ transaction.transaction_id }}</td>
                             <td class="font-weight-medium">
                               <div class="badge badge-success">
                                 {{ transaction.status }}
@@ -430,7 +364,12 @@
                 </div>
               </div>
             </div>
+            <div class=".transfer_form">
+              <h5>Make Transfer</h5>
+              <form></form>
+            </div>
           </div>
+
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
@@ -480,9 +419,6 @@ export default {
   },
 
   methods: {
-    navigateRoute(routeName) {
-      this.$router.push(`/${routeName}`);
-    },
     logout() {
       this.$confirm("Close current Session?", "Logout", {
         confirmButtonText: "OK",
@@ -519,6 +455,10 @@ export default {
       } catch (error) {
         console.log(error.response);
       }
+    },
+
+    navigateRoute(routeName) {
+      this.$router.push(`/${routeName}`);
     },
     toggleSideNav() {
       let sidenav = document.getElementById("sidebar");

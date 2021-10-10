@@ -15,9 +15,13 @@
           <a class="navbar-brand brand-logo mr-5" href="javascript:void(0)"
             >Steplight Bank</a
           >
-          <a class="navbar-brand brand-logo-mini" href="javascript:void(0)"
-            ><img src="@/assets/images/logo.png" alt="logo" style="width: 150%"
-          /></a>
+          <a class="navbar-brand brand-logo-mini" href="javascript:void(0)">
+            <img
+              src="@/assets/images/logo.png"
+              alt="logo"
+              style="width: 100%"
+            />
+          </a>
         </div>
         <div
           class="
@@ -201,7 +205,7 @@
         <!-- partial -->
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
-          <ul class="nav">
+          <ul class="nav" style="position: fixed">
             <li class="nav-item" @click="navigateRoute('dashboard')">
               <a class="nav-link" href="javascript:void(0)">
                 <i class="icon-grid menu-icon"></i>
@@ -234,12 +238,12 @@
                     >
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)"
+                    <a class="nav-link" href="pages/ui-features/dropdowns.html"
                       >Fund Transfer</a
                     >
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)"
+                    <a class="nav-link" href="pages/ui-features/typography.html"
                       >Bill Payments</a
                     >
                   </li>
@@ -271,11 +275,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link"
-                href="javascript:void(0)"
-                @click="navigateRoute('user_profile')"
-              >
+              <a class="nav-link" href="javascript:void(0)">
                 <i class="icon-columns menu-icon"></i>
                 <span class="menu-title">Update Profile</span>
               </a>
@@ -294,15 +294,7 @@
             <div class="row">
               <div class="col-md-12 grid-margin">
                 <div class="row">
-                  <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                    <h3 class="font-weight-bold">
-                      Welcome {{ userDetails.first_name }}
-                    </h3>
-                    <h6 class="font-weight-normal mb-0">
-                      All systems are running smoothly! You have
-                      <span class="text-primary">3 unread alerts!</span>
-                    </h6>
-                  </div>
+                  <div class="col-12 col-xl-8 mb-4 mb-xl-0"></div>
                   <div class="col-12 col-xl-4">
                     <div class="justify-content-end d-flex">
                       <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
@@ -333,104 +325,123 @@
                 </div>
               </div>
             </div>
+
             <div class="row">
-              <div class="col-md-6 grid-margin stretch-card">
-                <div class="card tale-bg">
-                  <div class="card-people mt-auto">
-                    <img
-                      src="@/assets/images/dashboard/people.png"
-                      alt="people"
-                    />
-                    <div class="weather-info">
-                      <div class="d-flex">
-                        <div>
-                          <h2 class="mb-0 font-weight-normal">
-                            <i class="icon-sun mr-2"></i>31<sup>C</sup>
-                          </h2>
-                        </div>
-                        <div class="ml-2">
-                          <h4 class="location font-weight-normal">Bangalore</h4>
-                          <h6 class="font-weight-normal">India</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 grid-margin transparent">
-                <div class="row py-4">
-                  <div class="col-md-8">
-                    <p class="text-muted font-weight-bold">MAIN ACCOUNT</p>
-
-                    <h4 class="mb-4">Steplight Savings Account</h4>
-                    <h6 class="mb-4">{{ userDetails.account_number }}</h6>
-
-                    <div class="d-flex" style="gap: 0.5rem">
-                      <button
-                        class="btn btn-dark rounded"
-                        @click="navigateRoute('transactions')"
-                      >
-                        Make Transfer
-                      </button>
-                      <button class="btn btn-dark rounded">
-                        Link Accounts
-                      </button>
-                    </div>
-                  </div>
-                  <div class="col-md-4 my-3 my-md-0">
-                    <p class="text-muted font-weight-bold">AVAILABLE FUNDS</p>
-                    <h2>
-                      {{ userDetails.available_bal }}
-                      <span class="text-muted"> $</span>
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row my-5">
-              <div class="col-md-12 grid-margin stretch-card">
+              <div class="col-md-12 grid-margin stretch-card mb-0">
                 <div class="card">
                   <div class="card-body">
-                    <p class="card-title mb-0">Transaction History</p>
-                    <div class="table-responsive">
-                      <table class="table table-striped table-borderless">
-                        <thead>
-                          <tr>
-                            <th>Transaction</th>
-                            <th>Details</th>
-                            <th>Amount</th>
-                            <th>Date</th>
-                            <th>Transaction ID</th>
-                            <th>Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr
-                            v-for="(transaction, index) in transactionsHistory"
-                            :key="index"
-                          >
-                            <td>{{ transaction.transaction_type }}</td>
-                            <td>{{ transaction.transaction_description }}</td>
-                            <td class="font-weight-bold">
-                              $ {{ transaction.transaction_amount }}
-                            </td>
-                            <td>{{ transaction.transaction_date }}</td>
-                            <td>{{ transaction.transaction_id }}</td>
-                            <td class="font-weight-medium">
-                              <div class="badge badge-success">
-                                {{ transaction.status }}
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <p class="card-title mb-0">User Profile</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- profile -->
+              <div class="bg-dark mx-3 p-2 p-lg-5 w-100">
+                <div class="row text-center text-md-left">
+                  <div class="col-md-6 text-center my-3 my-md-0">
+                    <div>
+                      <el-avatar :src="preview" class="avatar"></el-avatar>
+                    </div>
+                  </div>
+                  <div class="col-md-6 d-lg-flex justify-content-between">
+                    <div class="">
+                      <p class="text-white">
+                        Name: {{ userDetails.first_name }}
+                        {{ userDetails.middle_name }} {{ userDetails.surname }}
+                      </p>
+                      <p class="text-white">Email: {{ userDetails.email }}</p>
+                      <p class="text-white">
+                        Date of Birth: {{ userDetails.dob }}
+                      </p>
+                      <p class="text-white">
+                        Account Number: {{ userDetails.account_number }}
+                      </p>
+                      <p class="text-white">
+                        Account Status: {{ userDetails.status }}
+                      </p>
+                      <p class="text-white">
+                        Available Balance: {{ userDetails.available_bal }}
+                      </p>
+                      <button
+                        class="btn btn-dark border-success"
+                        @click="showForm()"
+                        v-if="toggleBtn"
+                      >
+                        Update Profile
+                      </button>
+                    </div>
+                    <div class="py-4 py-md-0" v-if="updateSection">
+                      <form action="" @submit.prevent="updateProfile()">
+                        <div class="form-group">
+                          <input
+                            type="file"
+                            class="form-control-file"
+                            id="file"
+                            ref="fileInput"
+                            @input="pickFile"
+                            required
+                          />
+                        </div>
+
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            name=""
+                            id=""
+                            class="form-control"
+                            placeholder="Next Of Kin"
+                            aria-describedby="helpId"
+                            v-model="profileUpdate.next_of_kin"
+                            required
+                          />
+                        </div>
+                        <div class="form-group">
+                          <input
+                            type="number"
+                            name=""
+                            id=""
+                            class="form-control"
+                            placeholder="Phone Number"
+                            aria-describedby="helpId"
+                            v-model="profileUpdate.phone_nok"
+                            required
+                          />
+                        </div>
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            name=""
+                            id=""
+                            class="form-control"
+                            placeholder="Relationship Status"
+                            aria-describedby="helpId"
+                            v-model="profileUpdate.relationship_nok"
+                            required
+                          />
+                        </div>
+
+                        <button
+                          type="submit"
+                          class="btn btn-dark border-success"
+                        >
+                          Save
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-dark border-success ml-2"
+                          @click="cancelUpdate()"
+                        >
+                          Cancel
+                        </button>
+                      </form>
                     </div>
                   </div>
                 </div>
               </div>
+              <!-- profile -->
             </div>
           </div>
+
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
@@ -468,6 +479,8 @@ export default {
       userDetails: "",
       userToken: "",
       transactionsHistory: "",
+      updateSection: false,
+      toggleBtn: true,
       transferDetails: {
         to_account: 3,
         transaction_type: "Credit",
@@ -476,13 +489,20 @@ export default {
         transaction_date: "2021-10-09",
         from_account: 1,
       },
+      preview:
+        "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
+
+      profileUpdate: {
+        next_of_kin: "",
+        passport: null,
+        phone_nok: "",
+        relationship_nok: "",
+      },
+      errors: [],
     };
   },
 
   methods: {
-    navigateRoute(routeName) {
-      this.$router.push(`/${routeName}`);
-    },
     logout() {
       this.$confirm("Close current Session?", "Logout", {
         confirmButtonText: "OK",
@@ -494,36 +514,60 @@ export default {
         })
         .catch(() => {});
     },
-    async transferList() {
-      try {
-        const response = await api.transferList();
-        console.log(response);
-      } catch (error) {
-        console.log(error.response);
-      }
-    },
-    async historyList() {
-      try {
-        const response = await api.historyList();
-        console.log(response);
-        this.transactionsHistory = response;
-      } catch (error) {
-        console.log(error.response);
+
+    pickFile() {
+      let input = this.$refs.fileInput;
+      let file = input.files;
+      if (file && file[0]) {
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.preview = e.target.result;
+          this.profileUpdate.passport = e.target.result;
+        };
+        reader.readAsDataURL(file[0]);
+        this.$emit("input", file[0]);
       }
     },
 
-    async makeTransfer() {
+    async updateProfile() {
       try {
-        const response = await api.makeTransfer(this.transferDetails);
+        console.log(this.profileUpdate);
+        const response = await api.updateProfile(this.profileUpdate);
         console.log(response);
       } catch (error) {
         console.log(error.response);
+        if (error.response.status == 422 || error.response.status == 400) {
+          this.errors = error.response.data;
+
+          for (let prop in this.errors) {
+            setTimeout(() => {
+              this.$message.error({
+                message: `${this.errors[prop][0]}`,
+                position: "top-right",
+                duration: 5000,
+              });
+            }, 5);
+          }
+        }
       }
+    },
+
+    showForm() {
+      this.updateSection = !this.updateSection;
+      this.toggleBtn = !this.toggleBtn;
+    },
+    cancelUpdate() {
+      this.updateSection = !this.updateSection;
+      this.toggleBtn = !this.toggleBtn;
     },
     toggleSideNav() {
       let sidenav = document.getElementById("sidebar");
 
       sidenav.classList.toggle("right");
+    },
+    navigateRoute(routeName) {
+      this.$router.push(`/${routeName}`);
     },
   },
   created() {
@@ -533,10 +577,6 @@ export default {
       this.userDetails = this.$store.getters.getUser;
       this.userToken = this.$store.getters.isLoggedIn;
     }
-
-    this.transferList();
-    this.historyList();
-    this.makeTransfer();
   },
 };
 </script>
@@ -548,7 +588,18 @@ export default {
   margin-right: 1rem;
 }
 
+.avatar {
+  width: 150px;
+  height: 150px;
+}
 .right {
   right: 0px;
+}
+
+@media (min-width: 768px) {
+  .avatar {
+    width: 300px;
+    height: 300px;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="container-fluid page-body-wrapper full-page-wrapper px-0">
         <div class="content-wrapper d-flex align-items-center auth px-0">
           <div class="row w-100 mx-0">
             <div class="col-lg-4 mx-auto">
@@ -16,7 +16,7 @@
                 <form
                   class="pt-3"
                   id="register"
-                  enctype="multipart/form-data"
+                  
                   @submit.prevent="register"
                 >
                   <!-- <v-file-input truncate-length="15"></v-file-input> -->
@@ -101,15 +101,14 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <input
-                          type="file"
-                          accept="image/*"
-                          name="uploadFile"
+                          type="date"
+                          
                           class="form-control form-control-lg"
-                          id="passport"
-                          placeholder="Passport "
+                          id="dob"
+                          placeholder="DOB"
                           required
-                          ref="file"
-                          v-on:change="handleFileUpload()"
+                          v-model="user.dob"
+                          
                         />
                       </div>
                     </div>
@@ -164,7 +163,7 @@
                   </div>
                   <div class="text-center mt-4 font-weight-light">
                     Already have an account?
-                    <a href="login.html " class="text-primary">Login</a>
+                    <a href="javascript:void(0)" class="text-primary" @click="navigateRoute('login')">Login</a>
                   </div>
                 </form>
               </div>
@@ -190,37 +189,50 @@ export default {
         surname: "",
         phone: "",
         sex: "",
-        passport: null,
+        dob: null,
         password: "",
         password2: "",
       },
+
+      errors: []
     };
   },
   methods: {
     async register() {
-      let formData = new FormData();
-      formData.append("email", this.user.email);
-      formData.append("first_name", this.user.first_name);
-      formData.append("middle_name", this.user.middle_name);
-      formData.append("surname", this.user.surname);
-      formData.append("phone", this.user.phone);
-      formData.append("sex", this.user.sex);
-      formData.append("passport", this.user.passport);
-      formData.append("password", this.user.password);
-      formData.append("password2", this.user.password2);
 
       try {
-        const response = await api.register(formData);
+        const response = await api.register(this.user);
         console.log(response);
-        console.log(formData);
+        console.log(this.user);
       } catch (error) {
-        console.log(error.response);
+
+          if (error.response.status == 422 || error.response.status == 400) {
+        
+            this.errors = error.response.data;
+
+             for (let prop in this.errors) {
+                setTimeout(() => {
+              this.$message.error({
+                message: `${this.errors[prop][0]}`,
+                position: "top-right",
+                duration: 5000,
+              });
+             
+            }, 5);
+              
+          }
+        
+        }
       }
     },
 
-    handleFileUpload() {
-      this.user.file = this.$refs.file.files[0];
-    },
+    navigateRoute(routeName) {
+        
+      this.$router.push(`/${routeName}`)
+  
+    }
+
+   
   },
 };
 </script>

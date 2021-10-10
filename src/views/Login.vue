@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="container-fluid page-body-wrapper full-page-wrapper px-0">
         <div class="content-wrapper d-flex align-items-center auth px-0">
           <div class="row w-100 mx-0">
             <div class="col-lg-4 mx-auto">
@@ -70,7 +70,7 @@
                                 </div> -->
                   <div class="text-center mt-4 font-weight-light">
                     Don't have an account?
-                    <a href="register.html" class="text-primary">Create</a>
+                    <a href="javascript:void(0)" class="text-primary" @click="navigateRoutes('register')">Create</a>
                   </div>
                 </form>
               </div>
@@ -102,12 +102,32 @@ export default {
 
       try {
         const response = await api.login(this.credentials);
+        console.log(response);
+         // Setting token to variable
+        const token = response.token;
+
+        // Getting Logged In user details
+        const userData = response.user;
+
+        // Dispatching token and userdata to store
+        this.$store.dispatch("login", { token, userData });
+
+        // Push to Dashboard
+        this.$router.push('/dashboard')
       } catch (error) {
         console.log(error.response);
-        alert(error.response.data.non_field_errors[0]);
+        if (error.response) {
+          alert(error.response.data.non_field_errors[0]);
+          
+        } 
       }
     },
+     navigateRoutes(routeName){
+    this.$router.push(`/${routeName}`)
+  }
   },
+
+ 
 };
 </script>
 
