@@ -13,12 +13,7 @@
                 <h6 class="font-weight-light">
                   Signing up is easy. It only takes a few steps
                 </h6>
-                <form
-                  class="pt-3"
-                  id="register"
-                  
-                  @submit.prevent="register"
-                >
+                <form class="pt-3" id="register" @submit.prevent="register">
                   <!-- <v-file-input truncate-length="15"></v-file-input> -->
                   <div class="form-group">
                     <input
@@ -102,13 +97,11 @@
                       <div class="form-group">
                         <input
                           type="date"
-                          
                           class="form-control form-control-lg"
                           id="dob"
                           placeholder="DOB"
                           required
                           v-model="user.dob"
-                          
                         />
                       </div>
                     </div>
@@ -163,7 +156,12 @@
                   </div>
                   <div class="text-center mt-4 font-weight-light">
                     Already have an account?
-                    <a href="javascript:void(0)" class="text-primary" @click="navigateRoute('login')">Login</a>
+                    <a
+                      href="javascript:void(0)"
+                      class="text-primary"
+                      @click="navigateRoute('login')"
+                      >Login</a
+                    >
                   </div>
                 </form>
               </div>
@@ -180,6 +178,7 @@
 <script>
 import api from "@/helpers/api.js";
 export default {
+  title: "Steplight Bank - Sign Up.",
   data() {
     return {
       user: {
@@ -194,45 +193,35 @@ export default {
         password2: "",
       },
 
-      errors: []
+      errors: [],
     };
   },
   methods: {
     async register() {
-
       try {
         const response = await api.register(this.user);
         console.log(response);
         console.log(this.user);
       } catch (error) {
+        if (error.response.status == 422 || error.response.status == 400) {
+          this.errors = error.response.data;
 
-          if (error.response.status == 422 || error.response.status == 400) {
-        
-            this.errors = error.response.data;
-
-             for (let prop in this.errors) {
-                setTimeout(() => {
+          for (let prop in this.errors) {
+            setTimeout(() => {
               this.$message.error({
                 message: `${this.errors[prop][0]}`,
                 position: "top-right",
                 duration: 5000,
               });
-             
             }, 5);
-              
           }
-        
         }
       }
     },
 
     navigateRoute(routeName) {
-        
-      this.$router.push(`/${routeName}`)
-  
-    }
-
-   
+      this.$router.push(`/${routeName}`);
+    },
   },
 };
 </script>

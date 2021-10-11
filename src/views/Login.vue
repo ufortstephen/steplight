@@ -18,7 +18,7 @@
                       type="email"
                       class="form-control form-control-lg"
                       id="email"
-                      placeholder="Username"
+                      placeholder="Email"
                       required
                       v-model="credentials.email"
                     />
@@ -56,6 +56,7 @@
                     <div class="form-check">
                       <label class="form-check-label text-muted">
                         <input type="checkbox" class="form-check-input" />
+                        <input type="checkbox" name="" id="" />
                         Keep me signed in
                       </label>
                     </div>
@@ -70,7 +71,12 @@
                                 </div> -->
                   <div class="text-center mt-4 font-weight-light">
                     Don't have an account?
-                    <a href="javascript:void(0)" class="text-primary" @click="navigateRoutes('register')">Create</a>
+                    <a
+                      href="javascript:void(0)"
+                      class="text-primary"
+                      @click="navigateRoutes('register')"
+                      >Create</a
+                    >
                   </div>
                 </form>
               </div>
@@ -87,6 +93,7 @@
 <script>
 import api from "@/helpers/api.js";
 export default {
+  title: "Steplight Bank -  Login.",
   data() {
     return {
       credentials: {
@@ -103,7 +110,7 @@ export default {
       try {
         const response = await api.login(this.credentials);
         console.log(response);
-         // Setting token to variable
+        // Setting token to variable
         const token = response.token;
 
         // Getting Logged In user details
@@ -113,21 +120,18 @@ export default {
         this.$store.dispatch("login", { token, userData });
 
         // Push to Dashboard
-        this.$router.push('/dashboard')
+        this.$router.push("/dashboard");
       } catch (error) {
         console.log(error.response);
         if (error.response) {
           alert(error.response.data.non_field_errors[0]);
-          
-        } 
+        }
       }
     },
-     navigateRoutes(routeName){
-    this.$router.push(`/${routeName}`)
-  }
+    navigateRoutes(routeName) {
+      this.$router.push(`/${routeName}`);
+    },
   },
-
- 
 };
 </script>
 

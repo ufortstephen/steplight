@@ -814,33 +814,33 @@
     <script src="./assets/js/owl.carousel.js"></script>
     <!-- script for banner slider-->
     <script>
-        $(document).ready(function() {
-            $('.owl-one').owlCarousel({
-                loop: true,
-                margin: 0,
-                nav: false,
-                responsiveClass: true,
-                autoplay: true,
-                autoplayTimeout: 5000,
-                autoplaySpeed: 1000,
-                autoplayHoverPause: false,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    480: {
-                        items: 1
-                    },
-                    667: {
-                        items: 1
-                    },
-                    1000: {
-                        items: 1
-                    }
-                }
-            })
-        })
-    </script>
+$(document).ready(function () {
+  $(".owl-one").owlCarousel({
+    loop: true,
+    margin: 0,
+    nav: false,
+    responsiveClass: true,
+    autoplay: true,
+    autoplayTimeout: 5000,
+    autoplaySpeed: 1000,
+    autoplayHoverPause: false,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      480: {
+        items: 1,
+      },
+      667: {
+        items: 1,
+      },
+      1000: {
+        items: 1,
+      },
+    },
+  });
+});
+</script>
     <!-- //script -->
     <!-- owl carousel -->
 
@@ -850,6 +850,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import appheader from "@/components/appHeader.vue";
 
 export default {
+  title: "Steplight Bank - Online Banking as it's Best.",
   name: "Home",
   components: {
     HelloWorld,

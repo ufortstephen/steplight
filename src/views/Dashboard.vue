@@ -252,24 +252,7 @@
                 <span class="menu-title">Account Statements</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">
-                <i class="icon-grid menu-icon"></i>
-                <span class="menu-title">Enroll New Credit Card</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">
-                <i class="icon-paper menu-icon"></i>
-                <span class="menu-title">Card Replacement</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">
-                <i class="icon-columns menu-icon"></i>
-                <span class="menu-title">New Checkbook</span>
-              </a>
-            </li>
+
             <li class="nav-item">
               <a
                 class="nav-link"
@@ -298,10 +281,6 @@
                     <h3 class="font-weight-bold">
                       Welcome {{ userDetails.first_name }}
                     </h3>
-                    <h6 class="font-weight-normal mb-0">
-                      All systems are running smoothly! You have
-                      <span class="text-primary">3 unread alerts!</span>
-                    </h6>
                   </div>
                   <div class="col-12 col-xl-4">
                     <div class="justify-content-end d-flex">
@@ -314,7 +293,8 @@
                           aria-haspopup="true"
                           aria-expanded="true"
                         >
-                          <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
+                          <i class="mdi mdi-calendar"></i>
+                          {{ today_date }}
                         </button>
                         <div
                           class="dropdown-menu dropdown-menu-right"
@@ -334,7 +314,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6 grid-margin stretch-card">
+              <div class="col-md-6 grid-margin stretch-card d-none d-md-block">
                 <div class="card tale-bg">
                   <div class="card-people mt-auto">
                     <img
@@ -363,7 +343,13 @@
                     <p class="text-muted font-weight-bold">MAIN ACCOUNT</p>
 
                     <h4 class="mb-4">Steplight Savings Account</h4>
-                    <h6 class="mb-4">{{ userDetails.account_number }}</h6>
+                    <h6 class="mb-4">
+                      Account Name: {{ userDetails.first_name }}
+                      {{ userDetails.surname }}
+                    </h6>
+                    <h6 class="mb-4">
+                      Account Number: {{ userDetails.account_number }}
+                    </h6>
 
                     <div class="d-flex" style="gap: 0.5rem">
                       <button
@@ -463,8 +449,10 @@
 <script>
 import api from "@/helpers/api";
 export default {
+  title: "Steplight Bank - Dashboard.",
   data() {
     return {
+      today_date: "",
       userDetails: "",
       userToken: "",
       transactionsHistory: "",
@@ -525,6 +513,34 @@ export default {
 
       sidenav.classList.toggle("right");
     },
+
+    getDate() {
+      const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let d = new Date();
+      let month = d.toLocaleString("default", { month: "long" });
+      let day = d.getDate();
+      this.today_date =
+        days[d.getDay()] +
+        " " +
+        month +
+        " " +
+        day +
+        " " +
+        d.getFullYear() +
+        "    " +
+        d.getHours() +
+        ":" +
+        d.getMinutes();
+      console.log(this.today_date);
+    },
   },
   created() {
     if (!this.$store.getters.isLoggedIn) {
@@ -537,6 +553,7 @@ export default {
     this.transferList();
     this.historyList();
     this.makeTransfer();
+    this.getDate();
   },
 };
 </script>

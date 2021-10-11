@@ -255,6 +255,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import appheader from "@/components/appHeader.vue";
 
 export default {
+    title: "Steplight Bank - Our Services.",
   name: "Home",
   components: {
     HelloWorld,

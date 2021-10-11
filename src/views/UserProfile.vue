@@ -256,24 +256,7 @@
                 <span class="menu-title">Account Statements</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">
-                <i class="icon-grid menu-icon"></i>
-                <span class="menu-title">Enroll New Credit Card</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">
-                <i class="icon-paper menu-icon"></i>
-                <span class="menu-title">Card Replacement</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">
-                <i class="icon-columns menu-icon"></i>
-                <span class="menu-title">New Checkbook</span>
-              </a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="javascript:void(0)">
                 <i class="icon-columns menu-icon"></i>
@@ -474,6 +457,7 @@
 <script>
 import api from "@/helpers/api";
 export default {
+  title: "Steplight Bank -  User Profile",
   data() {
     return {
       userDetails: "",
